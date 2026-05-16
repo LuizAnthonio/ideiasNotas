@@ -1,28 +1,92 @@
-const Ideia = require("../models/Ideia.js")
+const Ideia = require("../models/Ideia")
 const express = require("express")
 const app = express()
 
 
 const criar = async (req,res) => {
 
+    try{
 
-    const aIdeia = {title:"Ideia 1", descricao:"descrevo"}
+        const { titulo, descricao } = req.body;
+        
+        console.log( titulo, descricao)
+        const ideiaSerSalva = new Ideia({
+            titulo, descricao
+        })
+        
+        const salvarIdeia = await ideiaSerSalva.save()
 
-    const sav = new Ideia(aIdeia)
+    
+        res.status(200).json("Ok")
 
-    const salvaideia = await sav.save()
+    }catch(err){
+        
 
-    res.status(200).json(aIdeia)
-
-
+        res.status(501).json({erro: String(err)})
+        
+    }
+    
+    
 }
 
 const mostra = async (req,res) => {
-    res.send("aqui ó")
+    
+    try{
+        const ideiaDb = await Ideia.find()
+        
+        res.status(201).json(ideiaDb)
+        
+    }catch(err){
+        res.status(501).json({erro: String(err)})
+        
+    }
+    
+    
+    
+}
+
+const excluir = async (req,res) => {
+    
+    try{
+        
+        const id = req.params.id;
+        
+        const ideias = await Ideia.deleteOne({_id:id})
+
+        res.status(201).json(ideias)
+
+    }catch(err){
+        res.status(501).json({erro: String(err)})
+        
+    }
+    
+    
+    
+    
+}
+
+const update = async (req,res) => {
+    try{
+
+        const id = req.params.id;
+
+        const { titulo, descricao } = req.body;
+        
+        const ideias = await Ideia.findByIdAndUpdate(id,{ titulo, descricao }, {new:true})
+        
+        res.status(201).json(ideias)
+        
+        
+    }catch(err){
+        res.status(501).json({erro: String(err)})
+        
+    }
 }
 
 
 module.exports = {
     criar,
-    mostra
+    mostra,
+    excluir,
+    update
 }
