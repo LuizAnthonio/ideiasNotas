@@ -20,9 +20,11 @@ mongoose.connect(
 //Endpoints
 const ideias = require("./routes/IdeiaRouter")
 const user = require("./routes/UserRouter")
+const unidade = require("./routes/UnidadeRouter")
 
 app.use("/", ideias)
 app.use("/auth", user)
+app.use("/unidade", unidade)
 
 //Servidor
 app.listen(3000, () => {
