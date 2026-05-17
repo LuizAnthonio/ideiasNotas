@@ -7,11 +7,11 @@ const criar = async (req,res) => {
 
     try{
 
-        const { titulo, descricao } = req.body;
+        const { titulo, descricao, tipo, evolucao, modulo,link,unidade,tipoUnidade,status } = req.body;
         
         console.log( titulo, descricao)
         const ideiaSerSalva = new Ideia({
-            titulo, descricao
+            titulo, descricao, tipo, evolucao, modulo,link,unidade,tipoUnidade,status
         })
         
         const salvarIdeia = await ideiaSerSalva.save()
@@ -70,9 +70,9 @@ const update = async (req,res) => {
 
         const id = req.params.id;
 
-        const { titulo, descricao } = req.body;
+        const { titulo, descricao, tipo, evolucao, modulo,link,unidade,tipoUnidade,status } = req.body;
         
-        const ideias = await Ideia.findByIdAndUpdate(id,{ titulo, descricao }, {new:true})
+        const ideias = await Ideia.findByIdAndUpdate(id,{ titulo, descricao, tipo, evolucao, modulo,link,unidade,tipoUnidade,status }, {new:true})
         
         res.status(201).json(ideias)
         
