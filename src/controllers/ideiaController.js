@@ -1,86 +1,52 @@
 const Ideia = require("../models/Ideia")
-const express = require("express")
-const app = express()
 
 
 const criar = async (req,res) => {
 
-    try{
-
-        const { titulo, descricao, tipo, evolucao, modulo,link,unidade,tipoUnidade,status } = req.body;
+       // const { titulo, descricao, tipo, evolucao, modulo,link,unidade,tipoUnidade,status } = req.body;
         
-        console.log( titulo, descricao)
-        const ideiaSerSalva = new Ideia({
-            titulo, descricao, tipo, evolucao, modulo,link,unidade,tipoUnidade,status
-        })
+        const ideiaSerSalva = new Ideia(req.body)
         
         const salvarIdeia = await ideiaSerSalva.save()
 
     
-        res.status(200).json("Ok")
-
-    }catch(err){
-        
-
-        res.status(501).json({erro: String(err)})
-        
-    }
+        res.status(201).json({status:"Ok", data:salvarIdeia})
     
     
 }
 
 const mostra = async (req,res) => {
-    
-    try{
+
         const ideiaDb = await Ideia.find()
         
-        res.status(201).json(ideiaDb)
+        res.status(200).json(ideiaDb)
         
-    }catch(err){
-        res.status(501).json({erro: String(err)})
-        
-    }
-    
     
     
 }
 
 const excluir = async (req,res) => {
     
-    try{
         
         const id = req.params.id;
         
         const ideias = await Ideia.deleteOne({_id:id})
 
-        res.status(201).json(ideias)
+        res.status(204).json(ideias)
 
-    }catch(err){
-        res.status(501).json({erro: String(err)})
-        
-    }
-    
-    
-    
     
 }
 
 const update = async (req,res) => {
-    try{
 
         const id = req.params.id;
 
-        const { titulo, descricao, tipo, evolucao, modulo,link,unidade,tipoUnidade,status } = req.body;
+        //const { titulo, descricao, tipo, evolucao, modulo,link,unidade,tipoUnidade,status } = req.body;
         
-        const ideias = await Ideia.findByIdAndUpdate(id,{ titulo, descricao, tipo, evolucao, modulo,link,unidade,tipoUnidade,status }, {new:true})
+        const ideias = await Ideia.findByIdAndUpdate(id, req.body, {new:true})
         
-        res.status(201).json(ideias)
+        res.status(200).json(ideias)
         
-        
-    }catch(err){
-        res.status(501).json({erro: String(err)})
-        
-    }
 }
 
 

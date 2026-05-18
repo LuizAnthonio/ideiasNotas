@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 // Troque por uma palavra secreta sua ou use process.env.JWT_SECRET
-const JWT_SECRET = 'benehime'; 
+const JWT_SECRET = process.env.JWT_SECRET; 
 
 function verificarJWT(req, res, next) {
     const authHeader = req.headers['authorization'];
