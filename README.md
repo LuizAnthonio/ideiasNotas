@@ -25,6 +25,7 @@ API completa para gestão de ideias com autenticação, CRUD e sistema de evolu�
 | CORS | Segurança de requisições |
 
 ## 📁 Estrutura do Projeto
+
 src/
 ├── controllers/ # Lógica das rotas
 ├── models/ # Schemas do MongoDB
@@ -57,15 +58,31 @@ JWT_SECRET=sua_chave_secreta
 npm start
 ```
 
-## 📡 Endpoints principais
-Método	Rota	        Descrição	        Auth
-POST	/auth	        Criar usuário	    ❌
-POST	/auth/login	    Fazer login	        ❌
-GET	    /auth	        Listar usuários	    ✅
-GET	    /	            Listar ideias	    ✅
-POST	/	            Criar ideia	        ✅
-PUT	    /:id	        Atualizar ideia	    ✅
-DELETE	/:id	        Deletar ideia	    ✅
-GET	    /unidade	    Listar unidades	    ✅
-POST	/unidade	    Criar unidade	    ✅
 
+
+## 📡 Endpoints
+
+| Método | Rota | Descrição | Auth |
+|--------|------|-----------|------|
+| POST | `/auth` | Criar conta | ❌ |
+| POST | `/auth/login` | Login | ❌ |
+| GET | `/auth` | Listar usuários | ✅ |
+| GET | `/` | Listar ideias | ✅ |
+| POST | `/` | Criar ideia | ✅ |
+| PUT | `/:id` | Atualizar ideia | ✅ |
+| DELETE | `/:id` | Deletar ideia | ✅ |
+| GET | `/unidade` | Listar unidades | ✅ |
+| POST | `/unidade` | Criar unidade | ✅ |
+
+
+### 📊 Códigos de Resposta
+
+| Código | Significado |
+|--------|-------------|
+| 200 | Sucesso (GET, PUT, DELETE) |
+| 201 | Criado com sucesso (POST) |
+| 400 | Requisição inválida |
+| 401 | Não autorizado (token ausente) |
+| 403 | Token inválido ou expirado |
+| 404 | Recurso não encontrado |
+| 500 | Erro interno do servidor |
