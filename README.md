@@ -26,13 +26,14 @@ API completa para gestão de ideias com autenticação, CRUD e sistema de evolu�
 
 ## 📁 Estrutura do Projeto
 
+```bash
 src/
 ├── controllers/ # Lógica das rotas
 ├── models/ # Schemas do MongoDB
 ├── routes/ # Endpoints da API
 ├── middleware/ # Auth e tratamento de erros
 └── server.js # Entry point
-
+```
 
 ## 🔧 Como rodar localmente
 
