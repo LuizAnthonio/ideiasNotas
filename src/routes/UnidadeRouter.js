@@ -6,10 +6,10 @@ const unidadeController = require("../controllers/unidadeController")
 const verificarJWT = require("../middleware/authMiddleware");
 
 
-router.post("/",unidadeController.criar)
+router.post("/",verificarJWT,unidadeController.criar)
 router.get("/",verificarJWT,unidadeController.mostra)
-router.delete("/:id",unidadeController.excluir)
-router.put("/:id", unidadeController.update)
+router.delete("/:id",verificarJWT,unidadeController.excluir)
+router.put("/:id",verificarJWT, unidadeController.update)
 
 
 module.exports = router;
