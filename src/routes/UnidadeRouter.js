@@ -7,7 +7,7 @@ const verificarJWT = require("../middleware/authMiddleware");
 
 
 router.post("/",verificarJWT,unidadeController.criar)
-router.get("/",verificarJWT,unidadeController.mostra)
+router.get("/",unidadeController.mostra)
 router.delete("/:id",verificarJWT,unidadeController.excluir)
 router.put("/:id",verificarJWT, unidadeController.update)
 
